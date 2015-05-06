@@ -58,18 +58,6 @@ class RequestBacklog(DatabaseError):
 class ThrottledError(DatabaseError):
   pass
 
-class DockerAPIError(docker.errors.APIError):
-  pass
-
-class DockerConfigError(docker.errors.InvalidConfigFile):
-  pass
-
-class DockerVersionError(docker.errors.InvalidVersion):
-  pass
-
-class DockerRepositoryError(docker.errors.InvalidRepository):
-  pass
-
 #----------------  Exception Class End----------------------------------
 
 def parse_database_url(url):
