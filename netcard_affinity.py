@@ -160,12 +160,13 @@ class ModeOne(Mode):
 
     def SetAffinity(self, irqDict):
         coreList = Cpu.CPU_INFO()[self.socket]
-        coreNum = len(coreList)
+        coreid = coreList.keys()
+        coreNum = len(coreid)
         i = 0
 
         for netcard in irqDict:
             for irqinfo in irqDict[netcard]:
-                cpuset = coreList[i]
+                cpuset = coreList[coreid[i]]
                 self._set_affinity(irqinfo[1], cpuset)
                 i += 1
                 if i == coreNum:
@@ -183,18 +184,19 @@ class ModeTwo(Mode):
 
     def SetAffinity(self, irqDict):
         coreList = Cpu.CPU_INFO()[self.socket]
-        coreNum = len(coreList)
+        coreid = coreList.keys()
+        coreNum = len(coreid)
         j = 0
 
         for netcard in irqDict:
             if NetCard.IsTenGigabit(netcard):
                 i = 0
                 for irqinfo in irqDict[netcard]:
-                    cpuset = coreList[i % coreNum]
+                    cpuset = coreList[coreid[i % coreNum]]
                     self._set_affinity(irqinfo[1], cpuset)
                     i += 1
             else:
-                cpuset = coreList[j]
+                cpuset = coreList[coreid[j]]
                 for irqinfo in irqDict[netcard]:
                     self._set_affinity(irqinfo[1], cpuset)
                 j += 1
