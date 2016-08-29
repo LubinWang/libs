@@ -193,7 +193,7 @@ class MyDB(object):
             if self.index >= len(self.results):
                 return None
             self.index += 1
-                return self.results[self.index-1]
+            return self.results[self.index-1]
 
         #获取多条结果
         def FetchMany(self, size = None):
@@ -231,7 +231,7 @@ class MyDB(object):
             result = self.FetchMany(size)
             if len(result) <= 0:
                 return []
-          
+
             keys = []
             for item in self.description:
                 keys.append(item[0])
